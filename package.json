@@ -22,6 +22,7 @@
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.5.3",
     "html-webpack-plugin": "^4.2.1",
+    "miragejs": "^0.1.38",
     "postcss-loader": "^3.0.0",
     "prettier": "^2.0.5",
     "style-loader": "^1.2.1",

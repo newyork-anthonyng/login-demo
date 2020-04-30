@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "react-dom";
-import LoginPage from "./LoginPage";
+import LoginPage from "./LoginPage/index";
 
 import "./styles.css";
 
