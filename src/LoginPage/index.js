@@ -1,10 +1,30 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Button } from "reakit/Button";
 import { useMachine } from "@xstate/react";
-import loginMachine from "./machine";
+import { Machine } from "xstate";
+import { loginMachine, machineOptions } from "./machine";
 
 function LoginPage() {
-  const [current, send] = useMachine(loginMachine);
+  const emailInputRef = useRef(null);
+  const passwordInputRef = useRef(null);
+
+  const handleEmailInputFocus = () => {
+    requestAnimationFrame(() => {
+      emailInputRef.current.focus();
+    });
+  };
+
+  const handlePasswordInputFocus = () => {
+    requestAnimationFrame(() => {
+      passwordInputRef.current.focus();
+    });
+  };
+
+  const machine = Machine(
+    loginMachine,
+    machineOptions(handleEmailInputFocus, handlePasswordInputFocus)
+  );
+  const [current, send] = useMachine(machine);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -38,6 +58,7 @@ function LoginPage() {
               id="email-input"
               value={current.context.email}
               onChange={handleEmailChange}
+              ref={emailInputRef}
             />
           </div>
 
@@ -56,6 +77,7 @@ function LoginPage() {
               id="password-input"
               value={current.context.password}
               onChange={handlePasswordChange}
+              ref={passwordInputRef}
             />
           </div>
 

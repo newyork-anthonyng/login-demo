@@ -11,6 +11,7 @@ server.post("/login", function (schema, request) {
 
 const LOGIN_FAILED_CODE = 1;
 const TIMEOUT_CODE = 2;
+
 function login(email, password) {
   return new Promise((resolve, reject) => {
     fetch("/login", {
