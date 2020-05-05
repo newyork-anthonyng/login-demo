@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import { render } from "react-dom";
 import LoginPage from "./LoginPage/index";
+import CheckInPage from "./CheckInPage/index";
 
 import "./styles.css";
 
@@ -20,12 +21,19 @@ function App() {
             <li>
               <Link to="/login">Login</Link>
             </li>
+            <li>
+              <Link to="/daily-check-in">Daily Check In</Link>
+            </li>
           </ul>
         </nav>
 
         <Switch>
           <Route path="/login">
             <LoginPage />
+          </Route>
+
+          <Route path="/daily-check-in">
+            <CheckInPage />
           </Route>
 
           <Route>
