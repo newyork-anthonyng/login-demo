@@ -26,7 +26,6 @@ function login(email, password) {
       }),
     })
       .then((response) => {
-        console.log(response.status);
         if (response.status === 401) {
           return reject({ code: LOGIN_FAILED_CODE });
         } else if (!response.ok) {
