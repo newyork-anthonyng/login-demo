@@ -9,6 +9,7 @@ import {
 import { render } from "react-dom";
 import LoginPage from "./LoginPage/index";
 import CheckInPage from "./CheckInPage/index";
+import FeedPage from "./FeedPage/index";
 
 import "./styles.css";
 
@@ -34,6 +35,10 @@ function App() {
 
           <Route path="/daily-check-in">
             <CheckInPage />
+          </Route>
+
+          <Route path="/feed">
+            <FeedPage />
           </Route>
 
           <Route>

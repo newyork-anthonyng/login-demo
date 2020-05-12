@@ -1,10 +1,9 @@
 import React from "react";
-import { useMachine } from "@xstate/react";
-import todosMachine from "./todosMachine";
+import { useService } from "@xstate/react";
 import Todo from "./Todo";
 
-function Todos() {
-  const [state, send] = useMachine(todosMachine);
+function Todos({ todosRef }) {
+  const [state, send] = useService(todosRef);
 
   const { todos, outstandingTodoInput, completedTodoInput } = state.context;
 

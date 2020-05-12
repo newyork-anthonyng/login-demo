@@ -1,7 +1,7 @@
-import { Machine, spawn, assign } from "xstate";
+import { Machine, spawn, assign, sendParent } from "xstate";
 import todoMachine from "./todoMachine";
 import { uuid } from "uuidv4";
-import { retrieve, persist } from "./storage";
+import { retrieve, persist } from "../storage";
 
 function createTodo(title) {
   return {
@@ -53,13 +53,13 @@ const todosMachine = Machine(
         },
       },
       committingOutstandingTodo: {
-        entry: ["commitOutstandingTodo", "persist"],
+        entry: ["commitOutstandingTodo", "notifyParent", "persist"],
         on: {
           "": "ready",
         },
       },
       committingCompletedTodo: {
-        entry: ["commitCompletedTodo", "persist"],
+        entry: ["commitCompletedTodo", "notifyParent", "persist"],
         on: {
           "": "ready",
         },
@@ -89,10 +89,10 @@ const todosMachine = Machine(
         { target: "committingCompletedTodo" },
       ],
       "TODO.COMMIT": {
-        actions: ["commitTodoChange", "persist"],
+        actions: ["commitTodoChange", "notifyParent", "persist"],
       },
       "TODO.DELETE": {
-        actions: ["deleteTodo", "persist"],
+        actions: ["deleteTodo", "notifyParent", "persist"],
       },
     },
   },
@@ -105,6 +105,12 @@ const todosMachine = Machine(
     },
     actions: {
       persist: (ctx) => persist(ctx.todos),
+      notifyParent: sendParent((context) => {
+        return {
+          type: "PARENT.TODO_COMMIT",
+          todos: context.todos,
+        };
+      }),
       getInitialTodos: assign({
         todos: (context) => {
           return context.todos.map((todo) => ({
