@@ -4,6 +4,7 @@ import Mood from "./Mood/index";
 import machine from "./machine";
 import { useMachine } from "@xstate/react";
 import { Redirect } from "react-router-dom";
+import { Button } from "reakit/Button";
 
 function CheckInPage() {
   const [state, send] = useMachine(machine);
@@ -17,24 +18,38 @@ function CheckInPage() {
     return <Redirect to="/feed" />;
   }
   return (
-    <div>
-      <div>
-        <Mood moodRef={moods.ref} />
-      </div>
+    <div className="px-8">
+      <div className="bg-white py-4 px-8 mb-4">
+        <div>
+          <Mood moodRef={moods.ref} />
+        </div>
 
-      <div>
-        <Todos todosRef={todos.ref} />
-      </div>
+        <div className="flex">
+          <div className="w-1/2 p-1">
+            <Todos todosRef={todos.ref} />
+          </div>
+          <div className="w-1/2 p-1">
+            <label className="w-full mb-8 block font-semibold">
+              What would you like to learn from your teammate?
+              <textarea className="w-full border-solid border border-gray-600 h-40" />
+            </label>
+          </div>
+        </div>
 
-      <button onClick={handleSubmitClick}>Check in</button>
-      {state.matches("ready.mood.error") && (
-        <p>Please tell us how you're doing. Select a mood</p>
-      )}
-      {state.matches("ready.todos.error") && (
-        <p>Please tell us what you're going to do today.</p>
-      )}
-      <pre>{JSON.stringify(todos.todos, null, 2)}</pre>
-      <pre>{JSON.stringify(moods.emotions, null, 2)}</pre>
+        {state.matches("ready.mood.error") && (
+          <p>Please tell us how you're doing. Select a mood</p>
+        )}
+        {state.matches("ready.todos.error") && (
+          <p>Please tell us what you're going to do today.</p>
+        )}
+      </div>
+      <Button
+        type="submit"
+        className={`bg-button text-white uppercase px-6 py-2 rounded-sm font-body font-light block ml-auto`}
+        onClick={handleSubmitClick}
+      >
+        Share with team
+      </Button>
     </div>
   );
 }

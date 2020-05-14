@@ -7,10 +7,17 @@ function Mood({ moodRef }) {
   const { emotions } = current.context;
 
   return (
-    <div>
-      {emotions.map((emotion) => (
-        <Emotion key={emotion.title} emotionRef={emotion.ref} />
-      ))}
+    <div className="flex">
+      <div>
+        <p>Good morning, Anthony!</p>
+        <p>It's April 23, 2020. How are you feeling today?</p>
+      </div>
+
+      <div className="flex">
+        {emotions.map((emotion) => (
+          <Emotion key={emotion.title} emotionRef={emotion.ref} />
+        ))}
+      </div>
     </div>
   );
 }

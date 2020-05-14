@@ -44,13 +44,14 @@ function Todo({ todoRef }) {
     return <p>Loading...</p>;
   }
   return (
-    <div key={id}>
+    <div className="shadow-lg bg-white p-4 mb-1" key={id}>
       <div className="flex items-center">
         <input
           type="checkbox"
           onChange={handleCheckboxChange}
           value={completed}
           checked={completed}
+          className="mr-4"
         />
         <input
           className={state.matches("editing") ? "block" : "hidden"}

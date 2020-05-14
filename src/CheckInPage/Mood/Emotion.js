@@ -10,7 +10,9 @@ function Emotion({ emotionRef }) {
   return (
     <div
       onClick={handleClick}
-      className={`${selected ? "border-2 border-blue-600" : ""} cursor-pointer`}
+      className={`${
+        selected ? "border-blue-600" : "border-transparent"
+      } border-4 rounded cursor-pointer text-5xl p-6`}
     >
       {title}
     </div>

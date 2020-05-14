@@ -29,35 +29,45 @@ function Todos({ todosRef }) {
 
   return (
     <div>
-      <div>
-        <span>Today's intentions:</span>
+      <div className="mb-8">
+        <span className="font-semibold">Today's intentions:</span>
         {outstandingTodos.map((todo) => {
           return <Todo key={todo.id} todoRef={todo.ref} />;
         })}
-        <input
-          type="text"
-          value={outstandingTodoInput}
-          onChange={handleOutstandingTodoChange}
-          onKeyPress={handleOutstandingTodoKeyPress}
-          placeholder="Tell us what you're going to do"
-        />
+
+        <div className="p-4 bg-white flex items-center">
+          <input type="checkbox" value={false} className="mr-4" />
+          <input
+            type="text"
+            value={outstandingTodoInput}
+            onChange={handleOutstandingTodoChange}
+            onKeyPress={handleOutstandingTodoKeyPress}
+            placeholder="Tell us what you're going to do"
+            className="w-full"
+          />
+        </div>
+
         {state.matches("ready.outstandingTodoInput.error.empty") && (
           <span className="text-red-700">This can't be empty!</span>
         )}
       </div>
 
       <div>
-        <span>Yesterday's wins:</span>
+        <span className="font-semibold">Yesterday's wins:</span>
         {completedTodos.map((todo) => {
           return <Todo key={todo.id} todoRef={todo.ref} />;
         })}
-        <input
-          type="text"
-          value={completedTodoInput}
-          onChange={handleCompletedTodoChange}
-          onKeyPress={handleCompletedTodoKeyPress}
-          placeholder="Tell us what you did"
-        />
+        <div className="p-4 bg-white flex items-center">
+          <input type="checkbox" value={false} className="mr-4" />
+          <input
+            type="text"
+            value={completedTodoInput}
+            onChange={handleCompletedTodoChange}
+            onKeyPress={handleCompletedTodoKeyPress}
+            placeholder="Tell us what you did"
+            className="w-full"
+          />
+        </div>
         {state.matches("ready.completedTodoInput.error.empty") && (
           <span className="text-red-700">This can't be empty!</span>
         )}

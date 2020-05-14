@@ -16,9 +16,10 @@ import "./styles.css";
 function App() {
   return (
     <Router>
-      <div className="bg-background1 h-full pt-8">
-        <nav>
+      <div className="bg-background1 h-full">
+        <nav className="bg-purple-800 text-white p-4 mb-4">
           <ul>
+            <li>For debugging:</li>
             <li>
               <Link to="/login">Login</Link>
             </li>
