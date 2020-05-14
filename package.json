@@ -15,6 +15,9 @@
   ],
   "author": "Anthony Ng <newyork.anthonyng@gmail.com> (http://anthonyng.me)",
   "license": "MIT",
+  "engines": {
+    "node": "12.x"
+  },
   "private": true,
   "devDependencies": {
     "@babel/core": "^7.9.0",
