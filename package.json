@@ -4,7 +4,9 @@
   "description": "Get started with basic React boilerplate",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --open",
+    "start": "node server.js",
+    "build": "webpack",
+    "dev": "webpack-dev-server --open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -32,6 +34,7 @@
   },
   "dependencies": {
     "@xstate/react": "^0.8.1",
+    "express": "^4.17.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
