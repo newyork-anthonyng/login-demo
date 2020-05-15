@@ -17,12 +17,18 @@ server.get("/feed", function (schema, request) {
           { user: "Tony Stark", text: "Whooooaaaaa" },
           { user: "Luke Wilson", text: "Great job!" },
         ],
+        reactions: [{ user: "Luke Wilson", emoji: "🙁" }],
       },
       {
         user: "Gaby Chan",
         mood: "😇",
         text: `Play Animal Crossing`,
         comments: [{ user: "Tony Stark", text: "Whooooaaaaa" }],
+        reactions: [
+          { user: "Tony Stark", emoji: "😀" },
+          { user: "Luke Wilson", emoji: "😀" },
+          { user: "Luke Wilson", emoji: "🥰" },
+        ],
       },
     ],
   };
