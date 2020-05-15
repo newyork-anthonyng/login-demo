@@ -2,6 +2,7 @@ import React from "react";
 import { Machine, assign } from "xstate";
 import { useMachine } from "@xstate/react";
 import { fetchFeed } from "./api";
+import FeedItem from "./FeedItem";
 
 const machine = Machine(
   {
@@ -56,17 +57,7 @@ function FeedPage() {
   return (
     <div>
       {feedItems.map((feedItem) => {
-        return (
-          <div key={feedItem.user}>
-            <div>
-              {feedItem.user}
-              <span>{feedItem.mood}</span>
-            </div>
-            <div>
-              <p>{feedItem.text}</p>
-            </div>
-          </div>
-        );
+        return <FeedItem key={feedItem.user} {...feedItem} />;
       })}
     </div>
   );

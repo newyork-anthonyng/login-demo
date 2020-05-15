@@ -13,11 +13,16 @@ server.get("/feed", function (schema, request) {
         mood: "😇",
         text: `Something I am going to do today #1; Something I am going to do today #2; Something I am going to do today #3
             Just in case it goes into a second line`,
+        comments: [
+          { user: "Tony Stark", text: "Whooooaaaaa" },
+          { user: "Luke Wilson", text: "Great job!" },
+        ],
       },
       {
         user: "Gaby Chan",
         mood: "😇",
         text: `Play Animal Crossing`,
+        comments: [{ user: "Tony Stark", text: "Whooooaaaaa" }],
       },
     ],
   };
