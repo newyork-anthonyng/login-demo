@@ -26,6 +26,9 @@ function App() {
             <li>
               <Link to="/daily-check-in">Daily Check In</Link>
             </li>
+            <li>
+              <Link to="/feed">Daily Feed</Link>
+            </li>
           </ul>
         </nav>
 
