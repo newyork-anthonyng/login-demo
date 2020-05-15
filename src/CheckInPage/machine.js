@@ -13,6 +13,7 @@ const machine = Machine(
       todos: {
         todos: [],
       },
+      answerInput: "",
     },
     initial: "loading",
     states: {
@@ -35,9 +36,16 @@ const machine = Machine(
               target: "ready.todos.error",
             },
             {
+              cond: "isAnswerEmpty",
+              target: "ready.answer.error",
+            },
+            {
               target: "submitting",
             },
           ],
+          INPUT_ANSWER: {
+            actions: "cacheAnswerInput",
+          },
         },
 
         states: {
@@ -50,6 +58,14 @@ const machine = Machine(
           },
 
           todos: {
+            initial: "noError",
+            states: {
+              noError: {},
+              error: {},
+            },
+          },
+
+          answer: {
             initial: "noError",
             states: {
               noError: {},
@@ -91,6 +107,9 @@ const machine = Machine(
 
         return !result;
       },
+      isAnswerEmpty: (context) => {
+        return context.answerInput.trim().length === 0;
+      },
     },
     services: {
       submitCheckIn: (context, event) => {
@@ -100,6 +119,11 @@ const machine = Machine(
       },
     },
     actions: {
+      cacheAnswerInput: assign((_, event) => {
+        return {
+          answerInput: event.value,
+        };
+      }),
       loading: assign((context) => {
         return {
           moods: {
@@ -159,6 +183,7 @@ const machine = Machine(
         { selected: false, title: "😅" },
       ],
     },
+    answerInput: "",
   }
 );
 

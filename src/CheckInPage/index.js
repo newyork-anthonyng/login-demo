@@ -8,10 +8,14 @@ import { Button } from "reakit/Button";
 
 function CheckInPage() {
   const [state, send] = useMachine(machine);
-  const { moods, todos } = state.context;
+  const { moods, todos, answerInput } = state.context;
 
   const handleSubmitClick = () => {
     send({ type: "SUBMIT" });
+  };
+
+  const handleAnswerInputChange = (e) => {
+    send({ type: "INPUT_ANSWER", value: e.target.value });
   };
 
   if (state.matches("success")) {
@@ -31,17 +35,29 @@ function CheckInPage() {
           <div className="w-1/2 p-1">
             <label className="w-full mb-8 block font-semibold">
               What would you like to learn from your teammate?
-              <textarea className="w-full border-solid border border-gray-600 h-40" />
+              <textarea
+                className="w-full border-solid border border-gray-600 h-40"
+                value={answerInput}
+                onChange={handleAnswerInputChange}
+              />
             </label>
           </div>
         </div>
 
-        {state.matches("ready.mood.error") && (
-          <p>Please tell us how you're doing. Select a mood</p>
-        )}
-        {state.matches("ready.todos.error") && (
-          <p>Please tell us what you're going to do today.</p>
-        )}
+        <div className="text-red-700">
+          {state.matches("ready.mood.error") && (
+            <p>Please tell us how you're doing. Select a mood</p>
+          )}
+          {state.matches("ready.todos.error") && (
+            <p>Please tell us what you're going to do today.</p>
+          )}
+          {state.matches("ready.answer.error") && (
+            <p>
+              Please answer the question. It helps connect you with the rest of
+              your team.
+            </p>
+          )}
+        </div>
       </div>
       <Button
         type="submit"
